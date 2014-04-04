@@ -4,10 +4,15 @@
 import MySQLdb as mdb
 import sys
 
-# using the MySQLdb wrapper to access the info from the DB
+# Using the MySQLdb wrapper to access the info from the DB
 
 try: 
     con = mdb.connect('localhost', 'testuser', 'test623', 'testdb');
+    # We connect to the database. The connect() method has four parameters. The first
+    # parameter is the host, where the MySQL database is located. In our case it if localhost,
+    # for e.g. our computer. The second parameter is the database user name. It is followed by
+    # the user's account password. The final parameter is the database name.
+
     cur = con.cursor()
     cur.execute("SELECT VERSION()")
     ver = cur.fetchone()
