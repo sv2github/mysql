@@ -22,8 +22,11 @@ with con:
     cur.execute("INSERT INTO Writers(Name) VALUES('Emile Zola')")
     cur.execute("INSERT INTO Writers(Name) VALUE('Truman Capote')")
     
-    # Retrieving data
-    cur.execute("SELECT * FROM Writers LIMIT 5")
+   # Retrieving data
+   # cur.execute("SELECT * FROM Writers LIMIT 5")
+
+   # Prepared statements - using place holders instead of directly writing values
+    cur.execute("UPDATE Writers SET Name = %s WHERE Id = %s", ("Guy de Maupasant", "4"))
 
    # To fetch all at a time
    # rows = cur.fetchall()
@@ -45,10 +48,11 @@ with con:
    #     print row['Id'], row['Name']
 
    # Column Headers - Print Column Headers with the data from the table
-    rows = cur.fetchall()
-    desc = cur.description
-    print "%s %3s " %(desc[0][0], desc[1][0])
+   # rows = cur.fetchall()
+   # desc = cur.description
+   # print "%s %3s" %(desc[0][0], desc[1][0])
 
-    for row in rows:
-        print "%2s %3s" %row
+   # for row in rows:
+   #     print "%2s %3s" %row
     
+    print "Number of rows updated:", cur.rowcount 
