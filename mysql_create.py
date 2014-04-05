@@ -10,8 +10,8 @@ with con:
    # It also provides error handling
     
    # Variations of cursors
-   # cur = con.cursor()
-    cur = con.cursor(mdb.cursors.DictCursor)
+    cur = con.cursor()
+   # cur = con.cursor(mdb.cursors.DictCursor)
     
     cur.execute("DROP TABLE IF EXISTS Writers")
     cur.execute("CREATE TABLE Writers(Id INT PRIMARY KEY AUTO_INCREMENT,\
@@ -23,7 +23,7 @@ with con:
     cur.execute("INSERT INTO Writers(Name) VALUE('Truman Capote')")
     
     # Retrieving data
-    cur.execute("SELECT * FROM Writers LIMIT 4")
+    cur.execute("SELECT * FROM Writers LIMIT 5")
 
    # To fetch all at a time
    # rows = cur.fetchall()
@@ -40,8 +40,15 @@ with con:
    # dictionary cursor, the data is sent in a form of Python Dictionaries.
    # This way we can refer to the data by their column names.
 
+   # rows = cur.fetchall()
+   # for row in rows:
+   #     print row['Id'], row['Name']
+
+   # Column Headers - Print Column Headers with the data from the table
     rows = cur.fetchall()
+    desc = cur.description
+    print "%s %3s " %(desc[0][0], desc[1][0])
+
     for row in rows:
-        print row['Id'], row['Name']
-
-
+        print "%2s %3s" %row
+    
